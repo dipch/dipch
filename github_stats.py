@@ -57,8 +57,8 @@ class Queries(object):
         :param params: Query parameters to be passed to the API
         :return: deserialized REST JSON output
         """
-
-        for _ in range(60):
+        # CHANGED: Reduced from 60 retries to 3 retries to prevent workflow timeouts
+        for retry_count in range(3):
             headers = {
                 "Authorization": f"token {self.access_token}",
             }
@@ -72,8 +72,7 @@ class Queries(object):
                                                headers=headers,
                                                params=tuple(params.items()))
                 if r.status == 202:
-                    # print(f"{path} returned 202. Retrying...")
-                    print(f"A path returned 202. Retrying...")
+                    print(f"A path returned 202. Retrying... ({retry_count + 1}/3)")
                     await asyncio.sleep(2)
                     continue
 
@@ -88,13 +87,14 @@ class Queries(object):
                                      headers=headers,
                                      params=tuple(params.items()))
                     if r.status_code == 202:
-                        print(f"A path returned 202. Retrying...")
+                        print(f"A path returned 202. Retrying... ({retry_count + 1}/3)")
                         await asyncio.sleep(2)
                         continue
                     elif r.status_code == 200:
                         return r.json()
-        # print(f"There were too many 202s. Data for {path} will be incomplete.")
-        print("There were too many 202s. Data for this repository will be incomplete.")
+        
+        # CHANGED: Made the timeout message more explicit
+        print(f"There were too many 202s. Data for {path} will be incomplete. Skipping...")
         return dict()
 
     @staticmethod
@@ -427,7 +427,7 @@ Languages:
     async def all_repos(self) -> List[str]:
         """
         :return: list of names of user's repos with contributed repos included
-                irrespective of whether the ignore flag is set or not
+                 irrespective of whether the ignore flag is set or not
         """
         if self._repos is not None and self._ignored_repos is not None:
             return self._repos | self._ignored_repos
