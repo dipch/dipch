@@ -1,12 +1,16 @@
 name: ci
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   push:
     branches:
       - main
   schedule:
     - cron: '0 0 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -26,6 +30,7 @@ jobs:
 
   languages:
     name: Update local language stats
+    needs: update
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -56,5 +61,5 @@ jobs:
       - name: Commit and Push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Update transparent language stats"
+          commit_message: "Update transparent language stats [skip ci]"
           file_pattern: assets/languages.svg
