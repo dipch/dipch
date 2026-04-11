@@ -26,29 +26,6 @@ def generate_output_folder() -> None:
 # Individual Image Generation Functions
 ################################################################################
 
-async def generate_overview(s: Stats) -> None:
-    """
-    Generate an SVG badge with summary statistics
-    :param s: Represents user's GitHub statistics
-    """
-    with open("templates/overview.svg", "r") as f:
-        output = f.read()
-
-    output = re.sub("{{ name }}", await s.name, output)
-    output = re.sub("{{ stars }}", f"{await s.stargazers:,}", output)
-    output = re.sub("{{ forks }}", f"{await s.forks:,}", output)
-    output = re.sub("{{ contributions }}", f"{await s.total_contributions:,}",
-                    output)
-    changed = (await s.lines_changed)[0] + (await s.lines_changed)[1]
-    output = re.sub("{{ lines_changed }}", f"{changed:,}", output)
-    output = re.sub("{{ views }}", f"{await s.views:,}", output)
-    output = re.sub("{{ repos }}", f"{len(await s.all_repos):,}", output)
-
-    generate_output_folder()
-    with open("generated/overview.svg", "w") as f:
-        f.write(output)
-
-
 async def generate_languages(s: Stats) -> None:
     """
     Generate an SVG badge with summary languages used
@@ -117,7 +94,7 @@ async def main() -> None:
         s = Stats(user, access_token, session, exclude_repos=exclude_repos,
                   exclude_langs=exclude_langs,
                   consider_forked_repos=consider_forked_repos)
-        await asyncio.gather(generate_languages(s), generate_overview(s))
+        await generate_languages(s)
 
 
 if __name__ == "__main__":
