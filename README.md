@@ -1,6 +1,8 @@
 
 ![Stats](assets/badge.svg)
 
+![Languages](assets/languages.svg)
+
 * Software Engineer ✅ & Bioinformatics Researcher⏳
 * Current Master’s student in Bioinformatics at Uppsala University
 * Open to collaborate on bioinformatics research project

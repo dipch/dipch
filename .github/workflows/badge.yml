@@ -27,39 +27,3 @@ jobs:
           about: "need macha tea"
           theme: hypnotoad
           commit_message: "Update GitHub stats badge"
-
-  languages:
-    name: Update local language stats
-    needs: update
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Run local generator
-        env:
-          ACCESS_TOKEN: ${{ secrets.GH_PAT }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EXCLUDED: ${{ secrets.EXCLUDED }}
-          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
-          COUNT_STATS_FROM_FORKS: ${{ secrets.COUNT_STATS_FROM_FORKS }}
-        run: |
-          pip install -r requirements.txt
-          python -u generate_images.py
-          
-          mkdir -p assets
-          mv generated/languages.svg assets/languages.svg
-          rm -rf generated
-          
-      - name: Commit and Push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Update transparent language stats [skip ci]"
-          file_pattern: assets/languages.svg
