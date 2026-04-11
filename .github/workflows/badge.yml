@@ -20,6 +20,6 @@ jobs:
           gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
           badge_path: assets/badge.svg
           header: "🧬 hi i'm"
-          about: "neemacha tea"
+          about: "need macha tea"
           theme: hypnotoad
           commit_message: "Update GitHub stats badge"
