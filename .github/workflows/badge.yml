@@ -23,7 +23,7 @@ jobs:
           gh_token_stats: ${{ secrets.GH_PAT }}
           gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
           badge_path: assets/badge.svg
-          header: "🧬 hi i'm"
-          about: "need macha tea"
+          header: "hi 🧬"
+          about: "github.com/dipch"
           theme: hypnotoad
           commit_message: "Update GitHub stats badge"
