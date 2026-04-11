@@ -1,0 +1,25 @@
+name: ci
+
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update:
+    name: Update stats card
+    runs-on: ubuntu-latest
+    steps:
+      - uses: datarootsio/github-stats-card@v1
+        with:
+          username: dipch
+          gh_token_stats: ${{ secrets.GH_PAT }}
+          gh_token_commits: ${{ secrets.GITHUB_TOKEN }}
+          badge_path: assets/badge.svg
+          header: "🧬 hi i'm"
+          about: "neemacha tea"
+          theme: hypnotoad
+          commit_message: "Update GitHub stats badge"
