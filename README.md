@@ -6,10 +6,18 @@
 * Current Master’s student in Bioinformatics at Uppsala University
 * Open to collaborate on bioinformatics research project
 
-[![Email](https://img.shields.io/badge/Email-013243?style=for-the-badge&logo=gmail&logoColor=white)](mailto:dipchry@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-013243?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dipchowdhury/)
-[![Portfolio](https://img.shields.io/badge/Portfolio-013243?style=for-the-badge&logo=safari&logoColor=white)](https://dipchry.com)
+<a href="mailto:dipchry@gmail.com">
+  <img src="https://img.shields.io/badge/Email-dipchry@gmail.com-013243?style=for-the-badge&logo=gmail&logoColor=white"/>
+</a>
 
+<a href="https://www.linkedin.com/in/dipchowdhury/">
+  <img src="https://img.shields.io/badge/LinkedIn-dipchowdhury-013243?style=for-the-badge&logo=linkedin&logoColor=white"/>
+</a>
+
+<a href="https://dipchry.com">
+  <img src="https://img.shields.io/badge/Website-dipchry.com-013243?style=for-the-badge&logo=safari&logoColor=white"/>
+</a>
+<br><br>
 
 
 **Tech Stack**
